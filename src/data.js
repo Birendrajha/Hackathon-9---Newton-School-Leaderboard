@@ -162,3 +162,4 @@ const data = [
 ]
 
 exports.data = data;
+//module.exports = data;
