@@ -13,15 +13,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 // your code goes here
 
-const limitChecker = (limit) => {
-    if(limit === 0 || isNaN(limit)) {
-        return 20;
-    } else {
-        return limit;
-    }
-}
-
-const offsetChecker = (offset) => {
+function offsetf(offset)  {
     if(offset === 0 || isNaN(offset)) {
         return 0;
     } else {
@@ -29,20 +21,28 @@ const offsetChecker = (offset) => {
     }
 }
 
+function  limitf(limit){
+    if(limit === 0 || isNaN(limit)) {
+        return 20;
+    } else {
+        return limit;
+    }
+}
+
+
 app.get("/topRankings", (req, res) => {
     let limit = Number(req.query.limit);
     let offset = Number(req.query.offset);
-    console.log(limit);
-    console.log(offset);
+    
     const list = [];
-    limit = limitChecker(limit);
-    offset = offsetChecker(offset);
+    limit = limitf(limit);
+    offset = offsetf(offset);
    
     console.log(limit);
     console.log(offset);
 
 
-    for(let i = offset; i < offset+limit; i += 1) {
+    for(let i = offset; i < offset+limit; i++) {
         list.push(data[i]);
     }
     res.send(list);
